@@ -8,6 +8,12 @@
     g++ -o hello <app_name>.cpp
     ./<app_name>
 
+### Cython
+    code on file with .pyx extension
+    python3 setup.py build_ext --build-lib ./cython_dir
+    use cython module on a run.py
+    python3 run.py
+
 ### GDScript
     godot3 -s <app_name>.gd
 
