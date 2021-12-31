@@ -16,4 +16,12 @@ func main() {
 
     message := fmt.Sprintf("Deleted IDs : (%s)", strings.Join(deleted, ", "))
     fmt.Println(message)
+
+    example := []int{1,2,3,4,5}
+    sum := 0
+    for _, example := range(example) {
+        sum += example
+    }
+    fmt.Println(sum)
+    fmt.Println(example)
 }
