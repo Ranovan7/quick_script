@@ -16,3 +16,8 @@ puts (a/3)*3
 wb = Webhook.new
 
 puts wb.url
+
+aa = Hash["a" => 100]
+
+puts aa['a'] ? aa['a'] : 0
+puts aa['b'] ? aa['b'] : 0
