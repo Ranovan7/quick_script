@@ -9,6 +9,3 @@ File.write("log.txt", "Testing")
 
 puts "qwertsdfsdtg".to_s
 datetime2int
-
-a = "shipment_mark-as-paid"
-puts a.split(/\-(?=[\w])/)
