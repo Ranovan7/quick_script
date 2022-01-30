@@ -16,8 +16,7 @@
     godot3 -s <app_name>.gd
 
 ### Go
-    go build <app_name>.go
-    ./<app_name>
+    go run <app_name>.go
 
 ### Haskell
     ghc --make <app_name>.hs
