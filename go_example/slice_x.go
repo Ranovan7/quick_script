@@ -24,4 +24,9 @@ func main() {
     }
     fmt.Println(sum)
     fmt.Println(example)
+
+    a := []int{1,2,3,4,5}
+    b := []int{7,8,9}
+    a = append(a, b...)
+    fmt.Println(a)
 }
