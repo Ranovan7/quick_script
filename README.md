@@ -26,7 +26,7 @@
 ### Nim
     nim c -r --verbosity:0 <app name>.nim
 
-### NodeJS
+### NodeJS/Javascript
     node <filename>
 
 ### Python
@@ -38,3 +38,6 @@
 ### Rust
     rustc <app_name>.rs
     ./<app_name>
+
+### Typescript
+    npx ts-node <app_name>.ts
