@@ -42,4 +42,8 @@ func main() {
     for i, _ := range OILIds {
         fmt.Println(i, OILIds[i])
     }
+
+    example := "2022-01-31 00:00:00"
+    exT := time.Parse(example)
+    fmt.Println(exT)
 }
