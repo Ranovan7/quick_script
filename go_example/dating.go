@@ -14,7 +14,7 @@ type Example struct {
 func timeStrToUTC(timeStr string) string {
     tm, _ := time.Parse(time.RFC3339, timeStr)
     // return tm.UTC().Format(time.RFC3339)
-    return tm.Format(time.RFC3339)
+    return tm.UTC().Format(time.RFC3339)
 }
 
 func main() {
@@ -43,7 +43,25 @@ func main() {
         fmt.Println(i, OILIds[i])
     }
 
-    example := "2022-01-31 00:00:00"
-    exT := time.Parse(example)
-    fmt.Println(exT)
+    example1 := "2022-01-31 00:00:00"
+    example2 := "2022-01-31 00:00:00Z"
+    example3 := "2022-01-31T00:00:00Z"
+    example4 := "2022-01-31 00:00:00+07:00"
+    example5 := "2022-01-31T00:00:00+07:00"
+
+    fmt.Printf("Example1 : '%s'\n", timeStrToUTC(example1))
+    fmt.Printf("Example2 : '%s'\n", timeStrToUTC(example2))
+    fmt.Printf("Example3 : '%s'\n", timeStrToUTC(example3))
+    fmt.Printf("Example4 : '%s'\n", timeStrToUTC(example4))
+    fmt.Printf("Example5 : '%s'\n\n", timeStrToUTC(example5))
+
+    exampleP := "2022-01-31T00:00:00"
+    fmt.Printf("ExampleP : '%s'\n", exampleP)
+
+    exampleP = strings.Replace(exampleP, "Z", "", 1)
+    exampleP = strings.Replace(exampleP, " ", "T", 1)
+    if !strings.Contains(exampleP, "+") {
+        exampleP = exampleP + "+07:00"
+    }
+    fmt.Printf("Processed ExampleP : '%s'\n", timeStrToUTC(exampleP))
 }

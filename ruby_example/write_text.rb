@@ -9,3 +9,7 @@ File.write("log.txt", "Testing")
 
 puts "qwertsdfsdtg".to_s
 datetime2int
+
+ex = "Gachagame named "
+ex += "Arknights"
+puts ex
