@@ -26,7 +26,7 @@
     nim c -r --verbosity:0 <app name>.nim
 
 ### NodeJS/Javascript
-    node <filename>
+    node <filename>.js
 
 ### Python
     python3 <filename>.py
