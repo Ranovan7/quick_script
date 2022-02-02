@@ -32,7 +32,7 @@
     python3 <filename>.py
 
 ### Ruby
-    rby <app_name>.rb
+    ruby <app_name>.rb
 
 ### Rust
     rustc <app_name>.rs
