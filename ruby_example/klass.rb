@@ -28,6 +28,18 @@ class Wololo
     end
 end
 
+class AoE2
+    NORMAL = "normal"
+    CASTLE = "Castle"
+    UNIQUE = "Samurai"
+end
+
+def testing(something)
+    puts something
+rescue
+    puts "Error"
+end
+
 wl = Wololo.new(5)
 wl.new_var(new_val = 10)
 wl.testing
@@ -35,3 +47,6 @@ wl.testing
 puts wl.test_if_else
 
 puts nil
+
+testing(AoE2::ARCHER) rescue
+puts AoE2::NORMAL

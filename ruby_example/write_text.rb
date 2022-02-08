@@ -13,3 +13,11 @@ datetime2int
 ex = "Gachagame named "
 ex += "Arknights"
 puts ex
+
+begin
+    puts "Arknights"
+rescue
+    puts "Error Occured"
+else
+    puts "Else after Rescue"
+end
