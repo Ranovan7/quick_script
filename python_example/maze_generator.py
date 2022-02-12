@@ -1,5 +1,6 @@
 import random
 from typing import List, Tuple
+import matplotlib.pyplot as plt
 
 SIDES = ['up', 'down', 'right', 'left']
 
@@ -74,14 +75,21 @@ class Maze:
         return self
 
     def show(self):
+        x = []
+        y = []
         for i in range(self.dim):
             for j in range(self.dim):
                 if (i, j) in self.path:
                     self.maze[i][j] = ' '
                 else:
                     self.maze[i][j] = 'X'
-        for m in self.maze:
-            print("".join(m))
+                    x.append(j)
+                    y.append(i)
+        self.show_scatter(x, y)
+
+    def show_scatter(self, x, y):
+        plt.scatter(x, y, marker='s')
+        plt.show()
 
     def pick_room(self):
         picked = random.choice(self.init_rooms)
@@ -110,7 +118,7 @@ class Maze:
         return unmarked_rooms
 
 if __name__ == "__main__":
-    n = 51  # has to be odd numbers
+    n = 39  # has to be odd numbers
 
     print(f"Maze Generation for {n} x {n}")
     maze = Maze(n)
