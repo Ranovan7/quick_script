@@ -3,7 +3,7 @@ from typing import List, Tuple
 import matplotlib.pyplot as plt
 
 SIDES = ['up', 'down', 'right', 'left']
-SELECTOR = ['random', 'first_or_last', 'first_mid_last']
+SELECTOR = ['random', 'first_mid_last']
 
 def out_of_bounds(node, side, limit):
     if side == 'up':
@@ -57,13 +57,11 @@ class Maze:
                     else:
                         self.maze[i].append(" ")
                         self.init_rooms.append((i, j))
+        self.center_rooms = self.get_center_rooms()
         return self
 
     def prim_generation(self):
-        picked = self.pick_room()
-        self.path.append(picked)
-
-        self.update_wall_list(picked)
+        self.init_gen()
         wall = None
         while len(self.wall_list) > 0:
             wall = self.wall_selector(wall)
@@ -77,13 +75,16 @@ class Maze:
             self.wall_list.remove(wall)
         return self
 
+    def init_gen(self):
+        picked = self.pick_room()
+        self.path.append(picked)
+        self.update_wall_list(picked)
+
     def wall_selector(self, current_wall):
         if not current_wall:
             return random.choice(self.wall_list)
 
-        if self.selector == "first_or_last":
-            return self.wall_list[random.choice([0, -1])]
-        elif self.selector == "first_mid_last":
+        if self.selector == "first_mid_last":
             mid = round(len(self.wall_list)/2)
             return self.wall_list[random.choice([0, mid, -1])]
         else:   # random
@@ -107,9 +108,20 @@ class Maze:
         plt.scatter(x, y, marker='s')
         plt.show()
 
+    def get_center_rooms(self):
+        result = []
+        mid_high = round(self.dim/2) + 7
+        mid_low = round(self.dim/2) - 7
+        for room in self.init_rooms:
+            if room[0] >= mid_low and room[0] <= mid_high:
+                if room[1] >= mid_low and room[1] <= mid_high:
+                    result.append(room)
+        return result
+
     def pick_room(self):
-        picked = random.choice(self.init_rooms)
+        picked = random.choice(self.center_rooms)
         self.init_rooms.remove(picked)
+        self.center_rooms.remove(picked)
         return picked
 
     def update_wall_list(self, picked):
@@ -134,9 +146,8 @@ class Maze:
         return unmarked_rooms
 
 if __name__ == "__main__":
-    n = 53  # has to be odd numbers
+    n = 77  # has to be odd numbers
     # selector = 'random'
-    # selector = 'first_or_last'
     selector = 'first_mid_last'
 
     print(f"Maze Generation for {n} x {n}")
