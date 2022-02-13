@@ -3,6 +3,7 @@ from typing import List, Tuple
 import matplotlib.pyplot as plt
 
 SIDES = ['up', 'down', 'right', 'left']
+SELECTOR = ['random', 'first_or_last', 'first_mid_last']
 
 def out_of_bounds(node, side, limit):
     if side == 'up':
@@ -33,9 +34,11 @@ class Maze:
     init_rooms: List[tuple[int, int]] = []
     wall_list: List[tuple[int, int]] = []
     path: List[tuple[int, int]] = []
+    selector: str = "random"
 
-    def __init__(self, dim):
+    def __init__(self, dim, selector = "random"):
         self.dim = dim  # has to be odd numbers
+        self.selector = selector
 
     def grid_202(self):
         for i in range(self.dim):
@@ -61,8 +64,9 @@ class Maze:
         self.path.append(picked)
 
         self.update_wall_list(picked)
+        wall = None
         while len(self.wall_list) > 0:
-            wall = self.wall_list[0]
+            wall = self.wall_selector(wall)
             adj_rooms = self.get_adjacent_rooms(wall)
             unmarked_rooms = self.unmarked_rooms(adj_rooms)
             if len(unmarked_rooms) == 1:
@@ -71,8 +75,20 @@ class Maze:
                 self.init_rooms.remove(unmarked_rooms[0])
                 self.update_wall_list(unmarked_rooms[0])
             self.wall_list.remove(wall)
-            random.shuffle(self.wall_list)
         return self
+
+    def wall_selector(self, current_wall):
+        if not current_wall:
+            return random.choice(self.wall_list)
+
+        if self.selector == "first_or_last":
+            return self.wall_list[random.choice([0, -1])]
+        elif self.selector == "first_mid_last":
+            mid = round(len(self.wall_list)/2)
+            return self.wall_list[random.choice([0, mid, -1])]
+        else:   # random
+            random.shuffle(self.wall_list)
+            return self.wall_list[0]
 
     def show(self):
         x = []
@@ -118,10 +134,13 @@ class Maze:
         return unmarked_rooms
 
 if __name__ == "__main__":
-    n = 39  # has to be odd numbers
+    n = 53  # has to be odd numbers
+    # selector = 'random'
+    # selector = 'first_or_last'
+    selector = 'first_mid_last'
 
     print(f"Maze Generation for {n} x {n}")
-    maze = Maze(n)
+    maze = Maze(dim=n, selector=selector)
 
     print("Generated Maze")
     maze.grid_202().prim_generation().show()
