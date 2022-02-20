@@ -6,3 +6,10 @@ narr = JSON.parse(arr).map{|a| a['order_id']}
 for n in narr do
     puts n
 end
+
+def test
+    true
+end
+
+puts test
+puts test.to_i
