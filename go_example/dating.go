@@ -64,4 +64,6 @@ func main() {
         exampleP = exampleP + "+07:00"
     }
     fmt.Printf("Processed ExampleP : '%s'\n", timeStrToUTC(exampleP))
+
+    fmt.Printf("Last Month: %s\n", time.Now().Add(-30*24*time.Hour).UTC().Format(time.RFC3339))
 }
