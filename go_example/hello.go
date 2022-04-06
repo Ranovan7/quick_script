@@ -20,4 +20,11 @@ func main() {
         }
     }
     fmt.Println(min)
+
+    var x *int
+    fmt.Println("x = ", x)
+
+    y := 10
+    x = &y
+    fmt.Println(*x)
 }
